@@ -1,13 +1,12 @@
 import { teacher } from "@prisma/client";
-import { DuplicateEmailError } from "./errors";
 import { createUser } from "@/repositories";
-
+import bcrypt from "bcrypt";
 
 export async function createTeacher(
   name: string,
   email: string,
   password: string
 ): Promise<teacher> {
-  const user = await createUser(name, email, password );
-  return user;
+  const hashedPassword = await bcrypt.hash(password, 10);
+  return createUser(name, email, hashedPassword); 
 }
