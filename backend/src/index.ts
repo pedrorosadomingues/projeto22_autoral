@@ -2,7 +2,7 @@ import express, { Express } from "express";
 import cors from "cors";
 
 import { loadEnv, connectDb, disconnectDB } from "@/config";
-import { userRouter } from "@/routes";
+import { userRoute } from "@/routes";
 loadEnv();
 
 const app = express();
@@ -12,7 +12,7 @@ app.use(cors())
 .get("/health", (req, res) => {
   res.send("Hello World!");
 })
-.use('/user', userRouter)
+.use('/user', userRoute)
 
 
 export function init(): Promise<Express> {

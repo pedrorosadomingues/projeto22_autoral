@@ -1,15 +1,12 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { createUser} from '@/services/user-service'
+import { createTeacher } from "@/services/user-service";
 
-export async function createUser(
-  req: Request,
-  res: Response
-): Promise<Response> {
+export async function userPost(req: Request, res: Response): Promise<Response> {
   const { name, email, password } = req.body;
 
   try {
-    const user = await createUser({ name, email, password });
+    const user = await createTeacher(name, email, password);
     return res
       .status(httpStatus.CREATED)
       .send({ id: user.id, name: user.name, email: user.email });
