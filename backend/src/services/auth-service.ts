@@ -6,6 +6,7 @@ import { SignInParams } from "@/protocols";
 import { findUserByEmail } from "@/repositories";
 
 export async function signIn({ email, password }: SignInParams) {
+  
   const user = await findUserByEmail(email);
 
   if (!user) throw invalidCredentialsError();

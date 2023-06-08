@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 import httpStatus from 'http-status';
 import { signIn } from '@/services';
 import { SignInParams } from '@/protocols';
@@ -11,7 +11,7 @@ export async function signInPost(req: Request, res: Response) {
         console.log(result);
 
         return res.status(httpStatus.OK).send(result);
-    } catch (error) {
+    } catch (error) {       
         return res.status(httpStatus.UNAUTHORIZED).send(error);
-    }
+}
 }
