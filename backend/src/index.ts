@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import cors from "cors";
 import { loadEnv, connectDb, disconnectDB } from "@/config";
-import { userRoute } from "@/routes";
+import { authRoute, userRoute } from "@/routes";
 loadEnv();
 
 const app = express();
@@ -12,6 +12,7 @@ app.use(cors())
   res.send("Hello World!");
 })
 .use('/user', userRoute)
+.use('/sign-in', authRoute)
 
 
 export function init(): Promise<Express> {

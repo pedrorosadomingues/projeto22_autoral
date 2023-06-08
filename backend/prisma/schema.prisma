@@ -7,84 +7,85 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model classtime {
-  id               Int                @id
+model Classtime {
+  id               Int                @id @default(autoincrement())
   hour             DateTime           @db.Date
   dayweek          String             @db.VarChar(255)
-  classtimestudent classtimestudent[]
+  ClasstimeStudent ClasstimeStudent[]
 }
 
-model classtimestudent {
-  id          Int       @id
+model ClasstimeStudent {
+  id          Int       @id @default(autoincrement())
   classtimeid Int
   studentid   Int
-  classtime   classtime @relation(fields: [classtimeid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  student     student   @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Classtime   Classtime @relation(fields: [classtimeid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Student     Student   @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model nivel {
+model FinishedUnit {
+  id        Int     @id @default(autoincrement())
+  unitid    Int
+  studentid Int
+  Student   Student @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Unit      Unit    @relation(fields: [unitid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Nivel {
   id        Int       @id @default(autoincrement())
   name      String    @db.VarChar(255)
   createdat DateTime? @db.Date
   updatedat DateTime? @db.Date
-  student   student[]
-  unit      unit[]
+  Student   Student[]
+  Unit      Unit[]
 }
 
-model student {
+model Observation {
+  id          Int     @id @default(autoincrement())
+  description String  @db.VarChar(255)
+  studentid   Int
+  Student     Student @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Student {
   id               Int                @id @default(autoincrement())
   name             String             @db.VarChar(255)
   age              Int
   nivelid          Int
+  observation      String?            @db.VarChar(255)
   createdat        DateTime?          @db.Date
   updatedat        DateTime?          @db.Date
-  classtimestudent classtimestudent[]
-  observation      observation[]
-  nivel            nivel              @relation(fields: [nivelid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  unit             unit[]
-  unitstudent      unitstudent[]
-  userstudent      userstudent[]
+  Nivel            Nivel              @relation(fields: [nivelid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  ClasstimeStudent ClasstimeStudent[]
+  FinishedUnit     FinishedUnit[]
+  Observation      Observation[]
+  Unit             Unit[]
+  UserStudent      UserStudent[]
 }
 
-model teacher {
+model Unit {
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  nivelid      Int
+  studentid    Int
+  Nivel        Nivel          @relation(fields: [nivelid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Student      Student        @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  FinishedUnit FinishedUnit[]
+}
+
+model User {
   id          Int           @id @default(autoincrement())
   name        String        @db.VarChar(255)
-  email       String        @db.VarChar(255)
+  email       String        @db.VarChar(255) @unique
   password    String        @db.VarChar(255)
   createdat   DateTime?     @db.Date
   updatedat   DateTime?     @db.Date
-  userstudent userstudent[]
+  UserStudent UserStudent[]
 }
 
-model unit {
-  id          Int           @id
-  name        String        @db.VarChar(255)
-  nivelid     Int
-  studentid   Int
-  nivel       nivel         @relation(fields: [nivelid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  student     student       @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  unitstudent unitstudent[]
-}
-
-model userstudent {
-  id        Int     @id
-  teacherid Int
+model UserStudent {
+  id        Int     @id @default(autoincrement())
+  userid    Int
   studentid Int
-  student   student @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  teacher   teacher @relation(fields: [teacherid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model observation {
-  id          Int     @id
-  description String  @db.VarChar(255)
-  studentid   Int
-  student     student @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model unitstudent {
-  id        Int     @id
-  unitid    Int
-  studentid Int
-  student   student @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  unit      unit    @relation(fields: [unitid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Student   Student @relation(fields: [studentid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User      User    @relation(fields: [userid], references: [id], onDelete: NoAction, onUpdate: NoAction)
 }

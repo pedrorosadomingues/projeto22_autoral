@@ -6,7 +6,7 @@ export async function userPost(req: Request, res: Response): Promise<Response> {
   const { name, email, password } = req.body;
 
   try {
-    const user = await createTeacher(name, email, password);
+    const user = await createTeacher({ name, email, password });
     return res
       .status(httpStatus.CREATED)
       .send({ id: user.id, name: user.name, email: user.email });
