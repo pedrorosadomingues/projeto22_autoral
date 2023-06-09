@@ -41,7 +41,7 @@ export default function SignUp() {
                     type="password"
                     value={form.password} />
                 <Button type="submit">Cadastrar</Button>
-                <P>Já tem conta? <LinkStl href="/SignIn">Entre</LinkStl></P>
+                <P>Já tem conta? <LinkStl href="/">Entre</LinkStl></P>
             </Form>
         </SignUpCtn>
     )

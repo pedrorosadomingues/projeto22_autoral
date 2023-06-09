@@ -13,7 +13,7 @@ export default function SignIn() {
         e.preventDefault()
         try {
             const { data } = await api.post('/sign-in', form)
-            localStorage.setItem('token', data.token)
+            localStorage.setItem('token', data)
             window.location.href = '/Home'
         } catch (error) {
             console.log(error.response.data.message)
