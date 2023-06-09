@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { getStudentByUser } from "@/controllers";
+import { getStudentByUser, postStudent } from "@/controllers";
 
 const studentRoute = Router();
 
-studentRoute.get("/student/:id", getStudentByUser);
+studentRoute.post('/', postStudent)
+studentRoute.get("/:id", getStudentByUser);
 
 export { studentRoute };

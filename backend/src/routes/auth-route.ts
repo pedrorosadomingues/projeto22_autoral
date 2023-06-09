@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { signInPost } from '@/controllers';
+import { postSignIn } from '@/controllers';
 
 const authRoute = Router();
 
-authRoute.post('/', signInPost);
+authRoute.post('/', postSignIn);
 
 export { authRoute }
