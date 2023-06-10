@@ -12,6 +12,9 @@ export async function postSignIn(req: Request, res: Response) {
 
         return res.status(httpStatus.OK).send(result);
     } catch (error) {       
-        return res.status(httpStatus.UNAUTHORIZED).send(error);
+        if(error.name === 'InvalidCredentialsError'){
+            return res.send(httpStatus.UNAUTHORIZED).send(error);
+        }
+        return res.sendStatus(httpStatus.NOT_FOUND);
 }
 }

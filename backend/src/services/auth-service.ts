@@ -2,10 +2,10 @@ import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { invalidCredentialsError } from "@/errors";
-import { SignInParams } from "@/protocols";
+import { PostSignInParams } from "@/protocols";
 import { findUserByEmail } from "@/repositories";
 
-export async function signIn({ email, password }: SignInParams) {
+export async function signIn({ email, password }: PostSignInParams) {
   
   const user = await findUserByEmail(email);
 

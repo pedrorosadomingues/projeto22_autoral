@@ -13,4 +13,6 @@ export type PostSignInParams = {
 
 export type CreateUserParams = Pick<User, "name" | "email" | "password">;
 
-export type CreateStudentParams = Pick<Student, "userId" | "ra" | "cpf">;
+export type CreateStudentParams = Pick<Student, "userId" | "name" | "age" | "nivelId" | "classTimeId" | "cpf">;
+
+export type GetStudentByUserIdParams = Pick<Student, "userId">;

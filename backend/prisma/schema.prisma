@@ -8,23 +8,23 @@ datasource db {
 }
 
 model Classtime {
-  id      Int       @id
+  id      Int       @id @default(autoincrement())
   hour    DateTime  @db.Date
   dayweek String    @db.VarChar(255)
   Student Student[]
 }
 
 model FinishedUnit {
-  id        Int     @id
+  id        Int     @id @default(autoincrement())
   unitId    Int
   studentId Int
-  Student   Student @relation(fields: [studentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  Unit      Unit    @relation(fields: [unitId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Student   Student @relation(fields: [studentId], references: [id])
+  Unit      Unit    @relation(fields: [unitId], references: [id])
 }
 
 model Nivel {
-  id        Int       @id
-  name      String    @db.VarChar(255)
+  id        Int       @id @default(autoincrement())
+  name      String    @unique @db.VarChar(255)
   createdAt DateTime? @db.Date
   updatedAt DateTime? @db.Date
   Student   Student[]
@@ -32,44 +32,43 @@ model Nivel {
 }
 
 model Observation {
-  id          Int     @id
+  id          Int     @id @default(autoincrement())
   description String  @db.VarChar(255)
   studentId   Int
-  Student     Student @relation(fields: [studentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Student     Student @relation(fields: [studentId], references: [id])
 }
 
 model Student {
-  id           Int            @id
+  id           Int            @id @default(autoincrement())
   name         String         @db.VarChar(255)
-  age          Int
-  cpf          String         @db.VarChar(255)
-  observation  String?        @db.VarChar(255)
+  age          Int 
+  cpf          String         @unique @db.VarChar(255)
+  userId       Int            
   nivelId      Int
   classTimeId  Int
   createdAt    DateTime?      @db.Date
   updatedAt    DateTime?      @db.Date
-  Classtime    Classtime      @relation(fields: [classTimeId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  Nivel        Nivel          @relation(fields: [nivelId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  User         User           @relation(fields: [userId], references: [id])
+  Classtime    Classtime      @relation(fields: [classTimeId], references: [id])
+  Nivel        Nivel          @relation(fields: [nivelId], references: [id])
   FinishedUnit FinishedUnit[]
   Observation  Observation[]
-  Unit         Unit[]
 }
 
 model Unit {
-  id           Int            @id
+  id           Int            @id @default(autoincrement())
   name         String         @db.VarChar(255)
   nivelId      Int
-  studentId    Int
-  Nivel        Nivel          @relation(fields: [nivelId], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  Student      Student        @relation(fields: [studentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Nivel        Nivel          @relation(fields: [nivelId], references: [id])
   FinishedUnit FinishedUnit[]
 }
 
 model User {
-  id        Int       @id
-  name      String    @db.VarChar(255)
-  email     String    @db.VarChar(255)
-  password  String    @db.VarChar(255)
-  createdAt DateTime? @db.Date
-  updatedAt DateTime? @db.Date
+  id        Int               @id @default(autoincrement())
+  name      String            @db.VarChar(255)
+  email     String            @unique @db.VarChar(255)
+  password  String            @db.VarChar(255)
+  createdAt DateTime?         @db.Date
+  updatedAt DateTime?         @db.Date
+  Student   Student[]
 }
