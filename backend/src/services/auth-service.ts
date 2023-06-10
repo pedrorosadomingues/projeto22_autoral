@@ -3,7 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { invalidCredentialsError } from "@/errors";
 import { PostSignInParams } from "@/protocols";
-import { findUserByEmail } from "@/repositories";
+import { createSessionRepository, findUserByEmail } from "@/repositories";
+
 
 export async function signIn({ email, password }: PostSignInParams) {
   
@@ -15,9 +16,9 @@ export async function signIn({ email, password }: PostSignInParams) {
 
   if (!passwordMatch) throw invalidCredentialsError();
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
-    expiresIn: "1d",
-  });
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
+  await createSessionRepository({ userId: user.id, token });
+  
   return token ;
 }

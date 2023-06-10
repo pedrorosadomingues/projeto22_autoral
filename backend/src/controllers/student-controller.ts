@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import httpStatus from "http-status";
-import { getAllStudentsByUserIdService, createStudentService } from "@/services";
+import {
+  getAllStudentsByUserIdService,
+  createStudentService,
+} from "@/services";
 import { GetStudentByUserIdParams } from "@/protocols";
 import { Student } from "@prisma/client";
 
@@ -9,18 +12,24 @@ export async function postStudent(
   res: Response
 ): Promise<Response> {
   const { name, age, nivelId, classTimeId, cpf } = req.body as Student;
-  const { userId } = req.params ;
+  const { userId } = req.params as unknown as GetStudentByUserIdParams;
 
   try {
-    await createStudentService({ name, age, nivelId, classTimeId, cpf, userId: Number(userId) });
+    await createStudentService({
+      name,
+      age,
+      nivelId,
+      classTimeId,
+      cpf,
+      userId,
+    });
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
-    if (error.name === 'DuplicateCPFError'){
+    if (error.name === "DuplicateCPFError") {
       return res.sendStatus(httpStatus.CONFLICT);
     }
     return res.sendStatus(httpStatus.NOT_FOUND);
   }
-
 }
 
 export async function getStudentByUser(
@@ -30,7 +39,7 @@ export async function getStudentByUser(
   const { id } = req.params;
 
   try {
-    const result = await getAllStudentsByUserIdService( Number(id));
+    const result = await getAllStudentsByUserIdService(Number(id));
     return res.status(httpStatus.OK).send(result);
   } catch (error) {
     return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error);
