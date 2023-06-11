@@ -25,8 +25,8 @@ model FinishedUnit {
 model Nivel {
   id        Int       @id @default(autoincrement())
   name      String    @unique @db.VarChar(255)
-  createdAt DateTime? @db.Date
-  updatedAt DateTime? @db.Date
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
   Student   Student[]
   Unit      Unit[]
 }
@@ -46,8 +46,8 @@ model Student {
   userId       Int            
   nivelId      Int
   classTimeId  Int
-  createdAt    DateTime?      @db.Date
-  updatedAt    DateTime?      @db.Date
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
   User         User           @relation(fields: [userId], references: [id])
   Classtime    Classtime      @relation(fields: [classTimeId], references: [id])
   Nivel        Nivel          @relation(fields: [nivelId], references: [id])
@@ -68,8 +68,8 @@ model User {
   name      String            @db.VarChar(255)
   email     String            @unique @db.VarChar(255)
   password  String            @db.VarChar(255)
-  createdAt DateTime?         @db.Date
-  updatedAt DateTime?         @db.Date
+  createdAt DateTime? @default(now())
+  updatedAt DateTime? @updatedAt
   Student   Student[]
   Session   Session[]
 }

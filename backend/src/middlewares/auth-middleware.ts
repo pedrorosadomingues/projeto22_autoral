@@ -24,7 +24,7 @@ export async function authMiddleware(
     req.userId = id;
     next();
   } catch (error) {
-    throw unauthorizedError();
+    return generateUnauthorizedResponse(res);
   }
 }
 

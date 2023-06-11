@@ -26,7 +26,7 @@ export async function postStudent(
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
     if (error.name === "DuplicateCPFError") {
-      return res.sendStatus(httpStatus.CONFLICT);
+      return res.status(httpStatus.CONFLICT).send(error.message);
     }
     return res.sendStatus(httpStatus.NOT_FOUND);
   }

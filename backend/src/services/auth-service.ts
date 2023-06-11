@@ -16,7 +16,9 @@ export async function signIn({ email, password }: PostSignInParams) {
 
   if (!passwordMatch) throw invalidCredentialsError();
 
-  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+    expiresIn: "1d",
+  });
 
   await createSessionRepository({ userId: user.id, token });
   
