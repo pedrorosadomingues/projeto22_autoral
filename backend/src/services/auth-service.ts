@@ -22,5 +22,5 @@ export async function signIn({ email, password }: PostSignInParams) {
 
   await createSessionRepository({ userId: user.id, token });
   
-  return token ;
+  return token;
 }

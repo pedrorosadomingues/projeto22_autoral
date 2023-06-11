@@ -1,14 +1,17 @@
 import api from '../config/server';
 import { useEffect, useState } from 'react';
 import jwt from 'jsonwebtoken';
+import AddStudentModal from '../components/AddStudentModal';
+
 
 
 export default function Home() {
     const [students, setStudents] = useState([])
     const [haveStudent, setHaveStudent] = useState(false)
-    async function getStudentsByUserId(id) {
+
+    async function getStudentsByUserId(id, Auth) {
         try {
-            const { data } = await api.get(`/students/${id}`)
+            const { data } = await api.get(`/student/${id}`, Auth)
             setStudents(data)
         } catch (error) {
             console.log(error.response.data.message)
@@ -18,20 +21,31 @@ export default function Home() {
     useEffect(() => {
         const token = window.localStorage.getItem('token')
         if (!token) window.location.href = '/'
-        const { id } = jwt.decode(token)
-        getStudentsByUserId(id)
-        if (students.length === 0) setHaveStudent(false)
-        else setHaveStudent(true)
+        const Auth = { headers: { Authorization: `Bearer ${token}` } };
+        const  id  = jwt.decode(token).id
+        getStudentsByUserId(id, Auth)
+        if (students.length === 0) {
+            setHaveStudent(false)
+        } else {
+            setHaveStudent(true)
+        }
     }, [])
+
+    useEffect(() => {
+        if (students.length === 0) {
+          setHaveStudent(false)
+        } else {
+          setHaveStudent(true)
+        }
+      }, [students])
+      
     async function getStudents() { }
 
     return (
         <main className="flex w-full h-screen items-center justify-center column flex-col"
         >
-            {haveStudent ? (<h1>EM breve</h1>)
-                : (<h1 className='text-red-900 font-black'>Você não tem nenhum aluno cadastrado</h1>)}
-
-
+            {!haveStudent && (<AddStudentModal />)}
+            {haveStudent && (<AddStudentModal />)}
         </main>
     )
 }
