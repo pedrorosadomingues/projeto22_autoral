@@ -12,7 +12,7 @@ export async function postStudent(
   res: Response
 ): Promise<Response> {
   const { name, age, nivelId, classTimeId, cpf } = req.body as Student;
-  const { userId } = req.params as unknown as GetStudentByUserIdParams;
+  const { id } = req.params;
 
   try {
     await createStudentService({
@@ -21,7 +21,7 @@ export async function postStudent(
       nivelId,
       classTimeId,
       cpf,
-      userId,
+      userId: Number(id),
     });
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
