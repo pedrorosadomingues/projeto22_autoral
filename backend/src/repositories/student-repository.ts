@@ -9,7 +9,13 @@ export async function createStudentRepository(
     data: params,
   });
 }
-
+ export async function getStudentByIdRepository(id: number): Promise<Student> {
+  return prisma.student.findUnique({
+    where: {
+      id,
+    },
+  });
+ }
 export async function getStudentByCpfRepository(cpf: string): Promise<Student> {
   return prisma.student.findUnique({
     where: {
@@ -18,10 +24,20 @@ export async function getStudentByCpfRepository(cpf: string): Promise<Student> {
   });
 }
 
-export async function getAllStudentsByUserIdRepository(id: number): Promise<Student[]> {
+export async function getAllStudentsByUserIdRepository(
+  id: number
+): Promise<Student[]> {
   return prisma.student.findMany({
     where: {
-      userId: id
-    }
+      userId: id,
+    },
+  });
+}
+
+export async function deleteStudentByIdRepository(id: number): Promise<Student> {
+  return prisma.student.delete({
+    where: {
+      id,
+    },
   });
 }

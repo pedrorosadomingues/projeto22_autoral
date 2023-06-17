@@ -17,11 +17,11 @@ export async function authMiddleware(
     const { id } = verify(token, process.env.JWT_SECRET) as { id: number };
     const session = await prisma.session.findUnique({
       where: {
-        id,
+        token,
       },
     });
     if (!session) return generateUnauthorizedResponse(res);
-    req.userId = id;
+    res.locals.userId = id;
     next();
   } catch (error) {
     return generateUnauthorizedResponse(res);

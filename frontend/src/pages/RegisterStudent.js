@@ -15,9 +15,8 @@ export default function RegisterStudent() {
     }
     async function handleSubmit(e) {
         e.preventDefault()
-        const { id } = jwt.decode(token)
         try {
-            await api.post(`/student/${id}`, form, Auth)
+            await api.post(`/student/`, form, Auth)
             alert('Cadastrado com sucesso')
             window.location.href = '/'
         } catch (error) {

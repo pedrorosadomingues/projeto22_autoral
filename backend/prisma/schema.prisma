@@ -9,8 +9,13 @@ datasource db {
 
 model Classtime {
   id      Int       @id @default(autoincrement())
-  hour    DateTime  @db.Date
-  dayweek String    @db.VarChar(255)
+  hour    String    @unique @db.VarChar(255)
+  Student Student[]
+}
+
+model Dayweek {
+  id      Int       @id @default(autoincrement())
+  name    String    @unique @db.VarChar(255)
   Student Student[]
 }
 
@@ -35,7 +40,9 @@ model Observation {
   id          Int     @id @default(autoincrement())
   description String  @db.VarChar(255)
   studentId   Int
+  userId      Int
   Student     Student @relation(fields: [studentId], references: [id])
+  User        User    @relation(fields: [userId], references: [id])
 }
 
 model Student {
@@ -46,9 +53,11 @@ model Student {
   userId       Int            
   nivelId      Int
   classTimeId  Int
+  dayweekId    Int
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
   User         User           @relation(fields: [userId], references: [id])
+  Dayweek      Dayweek        @relation(fields: [dayweekId], references: [id])
   Classtime    Classtime      @relation(fields: [classTimeId], references: [id])
   Nivel        Nivel          @relation(fields: [nivelId], references: [id])
   FinishedUnit FinishedUnit[]
@@ -72,13 +81,14 @@ model User {
   updatedAt DateTime? @updatedAt
   Student   Student[]
   Session   Session[]
+  Observation  Observation[]
 }
 
 model Session {
   id        Int      @id @default(autoincrement())
   userId    Int       @unique
   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  token     String
+  token     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
