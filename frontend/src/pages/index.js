@@ -50,7 +50,7 @@ const Label = w.label`
   text-left`;
 
 const SignInCtn = w.main`
-flex w-full h-screen items-center justify-center column flex-col`;
+flex w-full h-screen items-center justify-center column flex-col bg-gray-200`;
 
 const Title = w.h1`
   text-red-900 font-black`;

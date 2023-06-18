@@ -9,7 +9,7 @@ export default function ClassTime({ time, id , students}) {
         <ClassTimeCtn>
         <ClassTimeStl >{time}</ClassTimeStl>
             {filteredStudents.map((student) => (
-                <div >
+                <div className='flex flex-col' >
                     <h1 className="text-red-900 font-black">{student.name}</h1>
                 </div>
             ))}
@@ -18,7 +18,7 @@ export default function ClassTime({ time, id , students}) {
 }
 
 const ClassTimeCtn = w.div`
-flex flex-col w-full h-screen items-init justify-center bg-gray-200 w-1/6 h-1/6 border-2 border-black`;
+flex  flex-col w-full h-screen items-center justify-center bg-gray-200 w-1/6 h-1/6 border-2 border-black`;
 
 const ClassTimeStl = w.h1`
-text-red-900 font-black bg-blue-200 ml--100 `;
+absolute left-20 text-red-900 font-black bg-blue-200 `;
