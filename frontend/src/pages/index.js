@@ -31,13 +31,13 @@ export default function SignIn() {
                     name="email"
                     type="email"
                     value={form.email} />
-                <Label>Senha</Label>
+                <Label>Password</Label>
                 <Input onChange={handleChange}
                     name="password"
                     type="password"
                     value={form.password} />
-                <Button type="submit">Entrar</Button>
-                <P>Não tem conta? <LinkStl href="/SignUp">Cadastre-se</LinkStl></P>
+                <Button type="submit">Sign-In</Button>
+                <P>Don`t have a account?<LinkStl href="/SignUp">Sign-Up</LinkStl></P>
             </Form>
         </SignInCtn>
     )

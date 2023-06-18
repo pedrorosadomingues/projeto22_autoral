@@ -27,7 +27,7 @@ export default function Home() {
         const Auth = { headers: { Authorization: `Bearer ${token}` } };
 
         getStudentsByUserId(Auth)
-    }, [])
+    }, [showRegisterStudentModal])
 
     return (
         <HomeContext.Provider value={{
@@ -35,17 +35,25 @@ export default function Home() {
             showRegisterStudentModal,
             setShowRegisterStudentModal
         }} >
-            <HomeCtn>
-                <AddStudentModal />
-                <TableWeek />
-            </HomeCtn>
 
+            <HomeCtn>
+                <Title>ClassPerformance</Title>
+                <AddStudentModal />
+           
             {
                 showRegisterStudentModal && <RegisterStudentModal />
             }
+                <TableWeek />
+
+            </HomeCtn>
+          
         </HomeContext.Provider>
     )
 }
 
+
 const HomeCtn = w.main`
-flex w-full h-screen items-center justify-center column flex-col`;
+flex w-full h-screen items-center justify-center column flex-col bg-gray-200`;
+
+const Title = w.h1`
+text-4xl font-bold text-center text-green-800 mt-60 mb-10`;

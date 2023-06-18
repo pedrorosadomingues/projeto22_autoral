@@ -16,11 +16,11 @@ export default function RegisterStudent() {
         console.log(form)
     }
     async function handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault()     
         try {
             await api.post(`/student`, form, Auth)
             alert('Cadastrado com sucesso')
-            window.location.href = '/'
+            setShowRegisterStudentModal(!showRegisterStudentModal)        
         } catch (error) {
             console.log(error)
             alert(error.message)
@@ -79,7 +79,7 @@ const RegisterStdModal = w.main`
 absolute z-1 top-0 flex w-full h-screen items-center justify-center column flex-col bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
 
 const RegisterStdCtn = w.main`
-relative flex w-1/3 items-center justify-center flex-col border-2 border-black border-opacity-50 p-4 rounded-lg shadow-lg`;
+flex w-1/3 items-center justify-center flex-col border-2 border-black border-opacity-50 p-4 rounded-lg shadow-lg bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
 const Title = w.h1`
   text-green-900 font-black text-2xl `;
 

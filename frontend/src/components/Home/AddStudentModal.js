@@ -8,14 +8,15 @@ export default function AddStudentModal() {
 
     return (
         <AddStudentModalCtn>
-           {
-            students.length === 0 && <h1 className="text-red-900 font-black">Não há alunos cadastrados</h1>
-           }
+           
            <Button 
            onClick={() => setShowRegisterStudentModal(!showRegisterStudentModal)}
            >
-            Cadastrar Aluno
+            Register new student
            </Button>
+           {
+            <h1 className="text-blue-900 font-black">You have { students.length } students</h1>
+           }
         </AddStudentModalCtn>
     )
 }
