@@ -13,7 +13,7 @@ model Classtime {
   Student Student[]
 }
 
-model Dayweek {
+model Weekday {
   id      Int       @id @default(autoincrement())
   name    String    @unique @db.VarChar(255)
   Student Student[]
@@ -53,11 +53,11 @@ model Student {
   userId       Int            
   nivelId      Int
   classTimeId  Int
-  dayweekId    Int
+  weekdayId    Int
   createdAt DateTime? @default(now())
   updatedAt DateTime? @updatedAt
   User         User           @relation(fields: [userId], references: [id])
-  Dayweek      Dayweek        @relation(fields: [dayweekId], references: [id])
+  Weekday      Weekday       @relation(fields: [weekdayId], references: [id])
   Classtime    Classtime      @relation(fields: [classTimeId], references: [id])
   Nivel        Nivel          @relation(fields: [nivelId], references: [id])
   FinishedUnit FinishedUnit[]

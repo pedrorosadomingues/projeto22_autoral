@@ -6,7 +6,8 @@ export default function TableWeek() {
         <>
             <div className="flex w-full h-screen items-center justify-center column flex-col">
                 {weekDays.map((day) => (
-                    <Weekday day={day} />
+                    <Weekday day={day}
+                    />
                 ))}
             </div>
         </>

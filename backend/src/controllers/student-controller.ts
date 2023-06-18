@@ -8,13 +8,12 @@ import {
 } from "@/services";
 import { GetStudentByUserIdParams } from "@/protocols";
 import { Student } from "@prisma/client";
-import { send } from "process";
 
 export async function postStudent(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const { name, age, nivelId, classTimeId, cpf, dayweekId } = req.body as Student;
+  const { name, age, nivelId, classTimeId, cpf, weekdayId } = req.body as Student;
   const { userId } = res.locals;
 
   try {
@@ -25,7 +24,7 @@ export async function postStudent(
       classTimeId: Number(classTimeId),
       cpf,
       userId: Number(userId),
-      dayweekId: Number(dayweekId),
+      weekdayId: Number(weekdayId)
     });
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {

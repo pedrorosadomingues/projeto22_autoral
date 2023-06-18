@@ -7,7 +7,7 @@ const studentRoute = Router();
 
 studentRoute
   .all("/*", authMiddleware)
-  .post("/:id", validateBody(createStudentSchema), postStudent)
+  .post("/", validateBody(createStudentSchema), postStudent)
   .get("/", getStudentByUser)
   .get(":studentId", getStudentById)
   .delete("/:id", deleteStudentById);

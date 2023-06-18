@@ -6,5 +6,6 @@ export const createStudentSchema = Joi.object<CreateStudentParams>({
     age: Joi.number().required(),
     nivelId: Joi.number().required(),
     classTimeId: Joi.number().required(),
+    weekdayId: Joi.number().required(),
     cpf: Joi.string().required(),
 });

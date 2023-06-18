@@ -2,9 +2,14 @@ import api from '../config/server';
 import { useEffect, useState } from 'react';
 import jwt from 'jsonwebtoken';
 import AddStudentModal from '../components/Home/AddStudentModal';
+import { HomeContext } from '@/contexts/HomeContext';
+import TableWeek from '@/components/Home/TableWeek';
+import { w } from 'windstitch';
+import RegisterStudentModal from '@/components/Home/RegisterStudentModal';
 
 export default function Home() {
     const [students, setStudents] = useState([])
+    const [showRegisterStudentModal, setShowRegisterStudentModal] = useState(false)
 
     async function getStudentsByUserId(Auth) {
         try {
@@ -17,33 +22,30 @@ export default function Home() {
 
     useEffect(() => {
         const token = localStorage.getItem('token')
-
         if (!token) window.location.href = '/'
+
         const Auth = { headers: { Authorization: `Bearer ${token}` } };
+
         getStudentsByUserId(Auth)
-        console.log("array", students)
-        if (students.length === 0) {
-            setHaveStudent(false)
-        } else {
-            setHaveStudent(true)
-        }
     }, [])
 
-    useEffect(() => {
-        if (students.length === 0) {
-          setHaveStudent(false)
-        } else {
-          setHaveStudent(true)
-        }
-      }, [students])
-      
-    async function getStudents() { }
-
     return (
-        <main className="flex w-full h-screen items-center justify-center column flex-col"
-        >
-            {!haveStudent && (<AddStudentModal />)}
-            {haveStudent && null}
-        </main>
+        <HomeContext.Provider value={{
+            students,
+            showRegisterStudentModal,
+            setShowRegisterStudentModal
+        }} >
+            <HomeCtn>
+                <AddStudentModal />
+                <TableWeek />
+            </HomeCtn>
+
+            {
+                showRegisterStudentModal && <RegisterStudentModal />
+            }
+        </HomeContext.Provider>
     )
 }
+
+const HomeCtn = w.main`
+flex w-full h-screen items-center justify-center column flex-col`;
