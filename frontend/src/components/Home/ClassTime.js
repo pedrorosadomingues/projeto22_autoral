@@ -21,4 +21,4 @@ const ClassTimeCtn = w.div`
 flex  flex-col w-full h-screen items-center justify-center bg-gray-200 w-1/6 h-1/6 border-2 border-black`;
 
 const ClassTimeStl = w.h1`
-absolute left-20 text-red-900 font-black bg-blue-200 `;
+absolute left-40 text-red-900 font-black bg-blue-200 `;

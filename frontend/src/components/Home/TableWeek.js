@@ -14,4 +14,4 @@ export default function TableWeek() {
 }
 
 const TableWeekCtn = w.div`
-flex w-3/4 items-center justify-center bg-gray-200`;
+flex w-4/6 items-center justify-center bg-gray-200`;
