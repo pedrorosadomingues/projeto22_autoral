@@ -12,7 +12,7 @@ export default function LevelButtons({ handleChange }) {
             <LevelBtnCtn>
                 {levels.map((level) => (
                     <LevelButtonsStl key={level.id}  >
-                        <input className={"cursor-pointer"} onClick={(e) => handleChange(e)} type="radio" name="nivelId" value={level.level} />
+                        <input className={"cursor-pointer"} onClick={(e) => handleChange(e)} type="radio" name="nivelId" value={level.id} />
                         <label className={"cursor-pointer"} >{level.level}</label>
                     </LevelButtonsStl>
                 ))}

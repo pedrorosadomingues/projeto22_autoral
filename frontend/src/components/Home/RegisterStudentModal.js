@@ -15,7 +15,6 @@ export default function RegisterStudent() {
     function handleChange(e) {
         const { name, value } = e.target
         setForm({ ...form, [name]: value })
-        console.log(form)
     }
     async function handleSubmit(e) {
         e.preventDefault()     
