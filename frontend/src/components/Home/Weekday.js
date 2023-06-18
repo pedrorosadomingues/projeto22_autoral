@@ -1,5 +1,5 @@
 import { w } from "windstitch";
-import { classTimes } from "../../utils/timeUtils";
+import { classTimes } from "@/utils";
 import ClassTime from "./ClassTime";
 import { useContext } from 'react'
 import { HomeContext } from '@/contexts/HomeContext'

@@ -3,6 +3,8 @@ import { HomeContext } from "../../contexts/HomeContext";
 import api from "../../config/server";
 import { w } from "windstitch";
 import jwt from 'jsonwebtoken';
+import { classTimes, weekdays, levels  } from "@/utils";
+import LevelButtons from "../Form/LevelButtons";
 
 export default function RegisterStudent() {
     const [form, setForm] = useState({ name: '', age: 0, nivelId: 0, classTimeId: 0, cpf: '' })
@@ -47,11 +49,7 @@ export default function RegisterStudent() {
                         name="cpf"
                         type="text"
                         value={form.cpf} />
-                    <Label>Level</Label>
-                    <Input onChange={handleChange}
-                        name="nivelId"
-                        type="number"
-                        value={form.nivelId} />
+                    <LevelButtons handleChange={handleChange}/>
                     <Label>Class Time</Label>
                     <Input onChange={handleChange}
                         name="classTimeId"
@@ -76,7 +74,7 @@ const Label = w.label`
   text-left`;
 
 const RegisterStdModal = w.main`
-absolute z-1 top-0 flex w-full h-screen items-center justify-center column flex-col bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
+absolute z-3 top-0 flex w-full h-screen items-center justify-center column flex-col bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
 
 const RegisterStdCtn = w.main`
 flex w-1/3 items-center justify-center flex-col border-2 border-black border-opacity-50 p-4 rounded-lg shadow-lg bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
