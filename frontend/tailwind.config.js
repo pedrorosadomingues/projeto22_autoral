@@ -7,6 +7,13 @@ module.exports = {
   ],
   theme: {
     extend: {
+      padding: {
+        '-pl': '-100px', // Exemplo de classe de utilidade para padding left negativo de -10px
+      },
+    },
+  },
+  theme: {
+    extend: {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

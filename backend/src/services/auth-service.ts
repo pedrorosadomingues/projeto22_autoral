@@ -2,10 +2,12 @@ import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { invalidCredentialsError } from "@/errors";
-import { SignInParams } from "@/protocols";
-import { findUserByEmail } from "@/repositories";
+import { PostSignInParams } from "@/protocols";
+import { createSessionRepository, findUserByEmail } from "@/repositories";
 
-export async function signIn({ email, password }: SignInParams) {
+
+export async function signIn({ email, password }: PostSignInParams) {
+  
   const user = await findUserByEmail(email);
 
   if (!user) throw invalidCredentialsError();
@@ -18,5 +20,7 @@ export async function signIn({ email, password }: SignInParams) {
     expiresIn: "1d",
   });
 
-  return token ;
+  await createSessionRepository({ userId: user.id, token });
+  
+  return {token, user};
 }
