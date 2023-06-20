@@ -29,9 +29,9 @@ export async function postStudent(
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
     if (error.name === "DuplicateCPFError") {
-      return res.status(httpStatus.CONFLICT).send(error.message);
+      return res.status(httpStatus.CONFLICT).send(error);
     }
-    return res.sendStatus(httpStatus.NOT_FOUND);
+    return res.send(httpStatus.NOT_FOUND).send(error);
   }
 }
 
@@ -53,7 +53,7 @@ export async function getStudentByUser(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const userId = res.locals.userId;
+  const { userId } = res.locals;
 
   try {
     const result = await getAllStudentsByUserIdService(Number(userId));
@@ -67,11 +67,11 @@ export async function deleteStudentById(
   req: Request,
   res: Response
 ): Promise<Response> {
-  const { userId, studentId } =
-    req.params as unknown as GetStudentByUserIdParams;
+  const { studentId } =req.params;
+  const { userId } = res.locals;
 
   try {
-    await deleteStudentByIdService(studentId, userId);
+    await deleteStudentByIdService(Number(userId), Number(studentId));
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
     return res.status(httpStatus.NOT_FOUND).send(error.message);

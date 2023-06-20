@@ -14,7 +14,7 @@ export default function Weekday({ day, id }) {
             <WeekdayCtn>
                 {
                     classTimes.map((time) => (
-                        <ClassTime time={time.time} id={time.id} students={filteredStudents} />
+                        <ClassTime key={time.id} time={time.time} id={time.id} students={filteredStudents} />
                     ))
                 }
             </WeekdayCtn>
@@ -23,7 +23,7 @@ export default function Weekday({ day, id }) {
 }
 
 const WeekdayStl = w.div`
-flex flex-col w-3/4 h-screen items-init justify-center bg-gray-200 min-w-150 h-1/6 border-2 border-black mt-10 `;
+flex flex-col w-3/4 h-screen items-init justify-center bg-gray-200 min-w-150 h-1/6 mt-10 `;
 
 const WeekdayCtn = w.div`
 flex h-screen items-init justify-center column flex-col `;

@@ -5,6 +5,8 @@ import { w } from "windstitch";
 import jwt from 'jsonwebtoken';
 import { classTimes, weekdays, levels  } from "@/utils";
 import LevelButtons from "../Form/LevelButtons";
+import ClassTimeButtons from "../Form/ClassTimeButtons";
+import WeekdayButtons from "../Form/WeekdayButtons";
 
 export default function RegisterStudent() {
     const [form, setForm] = useState({ name: '', age: 0, nivelId: 0, classTimeId: 0, cpf: '' })
@@ -23,13 +25,13 @@ export default function RegisterStudent() {
             alert('Cadastrado com sucesso')
             setShowRegisterStudentModal(!showRegisterStudentModal)        
         } catch (error) {
-            console.log(error)
-            alert(error.message)
+            error.response.data.details && alert(error.response.data.details)           
+            alert(error.response.data.message)
         }
     }
     return (
-        <RegisterStdModal>
-            <RegisterStdCtn>
+        <RegisterStdModal >
+            <RegisterStdCtn >
                 <Title>Register Student</Title>
                 <CloseBtn onClick={() => setShowRegisterStudentModal(!showRegisterStudentModal)}>X</CloseBtn>
                 <Form onSubmit={handleSubmit} >
@@ -49,17 +51,9 @@ export default function RegisterStudent() {
                         type="text"
                         value={form.cpf} />
                     <LevelButtons handleChange={handleChange}/>
-                    <Label>Class Time</Label>
-                    <Input onChange={handleChange}
-                        name="classTimeId"
-                        type="number"
-                        value={form.classTimeId} />
-                    <Label>Weekday</Label>
-                    <Input onChange={handleChange}
-                        name="weekdayId"
-                        type="number"
-                        value={form.weekdayId} />
-                    <Button type="submit">Cadastrar</Button>
+                    <ClassTimeButtons handleChange={handleChange}/>
+                    <WeekdayButtons handleChange={handleChange}/>
+                    <Button type="submit">Register</Button>
                 </Form>
             </RegisterStdCtn>
         </RegisterStdModal>
@@ -67,13 +61,13 @@ export default function RegisterStudent() {
 }
 
 const Input = w.input`
-  border border-gray-400 p-2 mb-2`;
+  border border-gray-400 p-2 mb-2 h-[25px]`;
 
 const Label = w.label`
   text-left`;
 
 const RegisterStdModal = w.main`
-absolute z-3 top-0 flex w-full h-screen items-center justify-center column flex-col bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
+absolute z-3 top-0 flex w-full h-[1200px] pb-[300px] items-center justify-center column flex-col bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
 
 const RegisterStdCtn = w.main`
 flex w-1/3 items-center justify-center flex-col border-2 border-black border-opacity-50 p-4 rounded-lg shadow-lg bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
@@ -84,7 +78,7 @@ const Form = w.form`
   flex flex-col w-1/3`;
 
 const Button = w.button`
-  bg-green-500 text-white font-bold py-2 px-4 rounded`;
+  bg-green-500 text-white font-bold py-2 px-4 rounded mt-4`;
 
 const CloseBtn = w.button`
   absolute top-2 right-2 bg-red-500 text-white font-bold py-2 px-4 rounded`;
