@@ -46,7 +46,7 @@ model Observation {
 }
 
 model Student {
-  id           Int            @id @default(autoincrement())
+  id           Int            @id @default(autoincrement()) @unique
   name         String         @db.VarChar(255)
   age          Int 
   cpf          String         @unique @db.VarChar(255)

@@ -10,6 +10,6 @@ studentRoute
   .post("/", validateBody(createStudentSchema), postStudent)
   .get("/", getStudentByUser)
   .get(":studentId", getStudentById)
-  .delete("/:id", deleteStudentById);
+  .delete("/:studentId", deleteStudentById);
 
 export { studentRoute };
