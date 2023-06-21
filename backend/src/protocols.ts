@@ -13,9 +13,12 @@ export type PostSignInParams = {
 
 export type CreateUserParams = Pick<User, "name" | "email" | "password">;
 
-export type CreateStudentParams = Omit<Student, "id" | "createdAt" | "updatedAt" >;
+export type CreateStudentParams = Omit<
+  Student,
+  "id" | "updatedAt"
+>;
 
 export type GetStudentByUserIdParams = {
   userId: number;
   studentId: number;
-}
+};

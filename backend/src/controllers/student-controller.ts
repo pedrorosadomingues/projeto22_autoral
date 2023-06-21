@@ -5,9 +5,11 @@ import {
   createStudentService,
   deleteStudentByIdService,
   getStudentByIdService,
+  updateStudentByIdService,
 } from "@/services";
 import { GetStudentByUserIdParams } from "@/protocols";
 import { Student } from "@prisma/client";
+import { create } from "domain";
 
 export async function postStudent(
   req: Request,
@@ -24,7 +26,8 @@ export async function postStudent(
       classTimeId: Number(classTimeId),
       cpf,
       userId: Number(userId),
-      weekdayId: Number(weekdayId)
+      weekdayId: Number(weekdayId),
+      createdAt: new Date(),
     });
     return res.sendStatus(httpStatus.CREATED);
   } catch (error) {
@@ -72,6 +75,33 @@ export async function deleteStudentById(
 
   try {
     await deleteStudentByIdService(Number(userId), Number(studentId));
+    return res.sendStatus(httpStatus.OK);
+  } catch (error) {
+    return res.status(httpStatus.NOT_FOUND).send(error.message);
+  }
+}
+
+export async function updateStudentById(
+  req: Request,
+  res: Response
+): Promise<Response> {
+  const { studentId } = req.params;
+  const { name, age, nivelId, classTimeId, weekdayId } = req.body as Student;
+  const { userId } = res.locals;
+
+  try {
+    await updateStudentByIdService({
+      name,
+      age: Number(age),
+      nivelId: Number(nivelId),
+      classTimeId: Number(classTimeId),
+      weekdayId: Number(weekdayId),
+      userId: Number(userId),
+      id: Number(studentId),
+      cpf: "",
+      updatedAt: new Date(),
+      createdAt: new Date(),
+    });
     return res.sendStatus(httpStatus.OK);
   } catch (error) {
     return res.status(httpStatus.NOT_FOUND).send(error.message);
