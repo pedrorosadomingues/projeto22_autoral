@@ -1,26 +1,26 @@
-import Link from 'next/link'
-import { useState } from 'react'
-import api from '../config/server'
-import { w } from "windstitch"
+import Link from 'next/link';
+import { useState } from 'react';
+import api from '../config/server';
+import { w } from "windstitch";
 
 export default function SignIn() {
-    const [form, setForm] = useState({ email: '', password: '' })
+    const [form, setForm] = useState({ email: '', password: '' });
     function handleChange(e) {
-        const { name, value } = e.target
-        setForm({ ...form, [name]: value })
-    }
+        const { name, value } = e.target;
+        setForm({ ...form, [name]: value });
+    };
     async function handleSubmit(e) {
-        e.preventDefault()
+        e.preventDefault();
         try {
-            const { data } = await api.post('/sign-in', form)
-           
-            localStorage.setItem('token', data.token)
-            window.location.href = '/Home'
+            const { data } = await api.post('/sign-in', form);      
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', data.user.name);
+            window.location.href = '/Home';
         } catch (error) {
-            console.log(error.response.data.message)
-            alert(error.response.data.message)
+            console.log(error.response.data.message);
+            alert(error.response.data.message);
         }
-    }
+    };
     return (
         <SignInCtn
         >
