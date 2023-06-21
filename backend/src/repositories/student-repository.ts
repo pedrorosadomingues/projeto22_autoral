@@ -1,6 +1,6 @@
 import { Student } from "@prisma/client";
 import { prisma } from "@/config";
-import { CreateStudentParams, GetStudentByUserIdParams } from "@/protocols";
+import { CreateStudentParams } from "@/protocols";
 
 export async function createStudentRepository(
   params: CreateStudentParams
@@ -31,6 +31,18 @@ export async function getAllStudentsByUserIdRepository(
     where: {
       userId: id,
     },
+  });
+}
+
+export async function upsertStudentRepository(
+  params:  Student
+): Promise<Student> {
+  return prisma.student.upsert({
+    where: {
+      id: params.id,
+    },
+    update: params,
+    create: params,
   });
 }
 
