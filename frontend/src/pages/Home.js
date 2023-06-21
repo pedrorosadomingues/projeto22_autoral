@@ -12,6 +12,9 @@ import ModalYesOrNo from '@/components/Home/YesOrNoModal';
 export default function Home() {
     const [students, setStudents] = useState([])
     const [userName, setUserName] = useState('')
+    const [stdState, setStdState] = useState({
+        name: '',
+    })
     const [showModal, setShowModal] = useState({
         registerStd: false,
         yesOrNo: false,
@@ -43,7 +46,9 @@ export default function Home() {
             showModal,
             setShowModal,
             handleEffect,
-            setHandleEffect
+            setHandleEffect,
+            stdState,
+            setStdState
         }} >
 
             <HomeCtn >

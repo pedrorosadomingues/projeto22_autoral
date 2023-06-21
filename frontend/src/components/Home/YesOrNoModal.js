@@ -1,10 +1,10 @@
 import { w } from 'windstitch';
 import { useContext, useState } from 'react';
 import { HomeContext } from '@/contexts/HomeContext';
-import { modalInfo, deleteStudentById } from '@/utils';
+import { deleteStudentById } from '@/utils';
 
 export default function Modal() {
-  const { showModal, setShowModal, attPage } = useContext(HomeContext);
+  const { showModal, setShowModal } = useContext(HomeContext);
 
 
   const handleClose = () => {
@@ -27,13 +27,13 @@ export default function Modal() {
                 className="px-4 py-2 mr-2 bg-blue-500 text-white rounded hover:bg-blue-600"
                 onClick={() => { handleDelete() }}
               >
-                Sim
+                Yes
               </button>
               <button
                 className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
                 onClick={() => { handleClose() }}
               >
-                Não
+                No
               </button>
             </div>
           </div>

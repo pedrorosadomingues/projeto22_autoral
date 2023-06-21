@@ -14,7 +14,7 @@ export default function Weekday({ day, id }) {
             <WeekdayCtn>
                 {
                     classTimes.map((time) => (
-                        <ClassTime key={time.id} time={time.time} id={time.id} students={filteredStudents} />
+                        <ClassTime key={time.id} time={time.time} id={time.id} day={day} students={filteredStudents} />
                     ))
                 }
             </WeekdayCtn>
