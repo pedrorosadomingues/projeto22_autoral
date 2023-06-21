@@ -1,15 +1,16 @@
 import { weekdays } from "@/utils/timeUtils"
 import Weekday from "./Weekday"
 import { w } from 'windstitch';
-import { setRelative } from "@/utils";
+import { setRelative, setHight800 } from "@/utils";
 import { useContext } from 'react'
 import { HomeContext } from '@/contexts/HomeContext'
 
 export default function TableWeek() {
-    const { showRegisterStudentModal } = useContext(HomeContext)
+    const { showModal } = useContext(HomeContext)
+
     
     return (
-        <TableWeekCtn className={setRelative(showRegisterStudentModal)}>
+        <TableWeekCtn className={setRelative(showModal.registerStd)+ setHight800(showModal.registerStd)}>
             {weekdays.map((day) => (
                 <Weekday key={day.id} day={day.day} id={day.id}
                 />

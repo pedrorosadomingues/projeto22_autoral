@@ -1,65 +1,79 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { HomeContext } from "../../contexts/HomeContext";
 import api from "../../config/server";
 import { w } from "windstitch";
-import jwt from 'jsonwebtoken';
-import { classTimes, weekdays, levels  } from "@/utils";
 import LevelButtons from "../Form/LevelButtons";
 import ClassTimeButtons from "../Form/ClassTimeButtons";
 import WeekdayButtons from "../Form/WeekdayButtons";
 
 export default function RegisterStudent() {
     const [form, setForm] = useState({ name: '', age: 0, nivelId: 0, classTimeId: 0, cpf: '' })
-    const { showRegisterStudentModal, setShowRegisterStudentModal } = useContext(HomeContext)
-    const token = localStorage.getItem('token')
-    const Auth = { headers: { Authorization: `Bearer ${token}` } };
+    const { showModal, setShowModal } = useContext(HomeContext)
+    const [token, setToken ] = useState(null)
+
+    useEffect(() => {
+        const token = localStorage.getItem('token')
+        setToken(token)
+    }, [token])
+    const Auth = { headers: {} };
+
+    if (token) {
+        Auth.headers.Authorization = `Bearer ${token}`;
+    }
 
     function handleChange(e) {
         const { name, value } = e.target
         setForm({ ...form, [name]: value })
     }
     async function handleSubmit(e) {
-        e.preventDefault()     
+
+        e.preventDefault()
         try {
             await api.post(`/student`, form, Auth)
             alert('Cadastrado com sucesso')
-            setShowRegisterStudentModal(!showRegisterStudentModal)        
+            setShowModal({ ...showModal, registerStd: !showModal.registerStd })
         } catch (error) {
-            error.response.data.details && alert(error.response.data.details)           
-            alert(error.response.data.message)
+            console.log(error)
+            error.response.data.details ? alert(error.response.data.details) : alert(error.response.data.message)
         }
     }
-    return (
-        <RegisterStdModal >
-            <RegisterStdCtn >
-                <Title>Register Student</Title>
-                <CloseBtn onClick={() => setShowRegisterStudentModal(!showRegisterStudentModal)}>X</CloseBtn>
-                <Form onSubmit={handleSubmit} >
-                    <Label>Name</Label>
-                    <Input onChange={handleChange}
-                        name="name"
-                        type="text"
-                        value={form.name} />
-                    <Label>Age</Label>
-                    <Input onChange={handleChange}
-                        name="age"
-                        type="number"
-                        value={form.age} />
-                    <Label>CPF</Label>
-                    <Input onChange={handleChange}
-                        name="cpf"
-                        type="text"
-                        value={form.cpf} />
-                    <LevelButtons handleChange={handleChange}/>
-                    <ClassTimeButtons handleChange={handleChange}/>
-                    <WeekdayButtons handleChange={handleChange}/>
-                    <Button type="submit">Register</Button>
-                </Form>
-            </RegisterStdCtn>
-        </RegisterStdModal>
-    )
-}
 
+    return (
+        <>
+            {
+                showModal.registerStd &&
+                <RegisterStdModal >
+                    <RegisterStdCtn >
+                        <Title>Register Student</Title>
+                        <CloseBtn onClick={() => setShowModal(!showModal.registerStd)}>X</CloseBtn>
+                        <Form onSubmit={handleSubmit} >
+                            <Label>Name</Label>
+                            <Input onChange={handleChange}
+                                name="name"
+                                type="text"
+                                value={form.name} />
+                            <Label>Age</Label>
+                            <Input onChange={handleChange}
+                                name="age"
+                                type="number"
+                                value={form.age} />
+                            <Label>CPF</Label>
+                            <Input onChange={handleChange}
+                                name="cpf"
+                                type="text"
+                                value={form.cpf} />
+                            <LevelButtons handleChange={handleChange} />
+                            <ClassTimeButtons handleChange={handleChange} />
+                            <WeekdayButtons handleChange={handleChange} />
+                            <Button type="submit">Register</Button>
+                        </Form>
+                    </RegisterStdCtn>
+                </RegisterStdModal>
+            }
+        </>
+    )
+
+}
 const Input = w.input`
   border border-gray-400 p-2 mb-2 h-[25px]`;
 

@@ -1,16 +1,21 @@
 import api from '../config/server';
 import { useEffect, useState } from 'react';
 import jwt from 'jsonwebtoken';
-import AddStudentModal from '../components/Home/AddStudentModal';
+import AddStudentModal from '../components/Home/AddStudentBtn';
 import { HomeContext } from '@/contexts/HomeContext';
 import TableWeek from '@/components/Home/TableWeek';
 import { w } from 'windstitch';
 import RegisterStudentModal from '@/components/Home/RegisterStudentModal';
-import { data } from 'autoprefixer';
+import ModalYesOrNo from '@/components/Home/YesOrNoModal';
+
 
 export default function Home() {
     const [students, setStudents] = useState([])
-    const [showRegisterStudentModal, setShowRegisterStudentModal] = useState(false)
+    const [userName, setUserName] = useState('')
+    const [showModal, setShowModal] = useState({
+        registerStd: false,
+        yesOrNo: false,
+    })
     const [handleEffect, setHandleEffect] = useState(false)
 
     async function getStudentsByUserId(Auth) {
@@ -25,36 +30,33 @@ export default function Home() {
     useEffect(() => {
         const token = localStorage.getItem('token')
         if (!token) window.location.href = '/'
-
         const Auth = { headers: { Authorization: `Bearer ${token}` } };
-        const { id } = jwt.decode(token)
-
+        const userName = localStorage.getItem('user')
+        setUserName(userName)
         getStudentsByUserId(Auth)
-    }, [showRegisterStudentModal, handleEffect])
+        
+    }, [showModal, handleEffect])
 
     return (
         <HomeContext.Provider value={{
             students,
-            showRegisterStudentModal,
-            setShowRegisterStudentModal,
+            showModal,
+            setShowModal,
             handleEffect,
             setHandleEffect
         }} >
 
             <HomeCtn >
-                {
-                 data.name ? <h1>{dat.name}</h1> : <h1>Carregando...</h1>
-                }
+
+                <h1> Hey, {userName} </h1>
+
                 <Title>ClassPerformance</Title>
                 <AddStudentModal />
-           
-            {
-                showRegisterStudentModal && <RegisterStudentModal />
-            }
+                <RegisterStudentModal />
                 <TableWeek />
-
+                <ModalYesOrNo />
             </HomeCtn>
-          
+
         </HomeContext.Provider>
     )
 }

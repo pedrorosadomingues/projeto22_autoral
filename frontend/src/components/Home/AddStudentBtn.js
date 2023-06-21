@@ -4,13 +4,13 @@ import { HomeContext } from '@/contexts/HomeContext'
 import { useContext } from 'react'
 
 export default function AddStudentModal() {
-    const { students, setShowRegisterStudentModal, showRegisterStudentModal } = useContext(HomeContext)
+    const { students, setShowModal, showModal } = useContext(HomeContext)
 
     return (
         <AddStudentModalCtn>
            
            <Button 
-           onClick={() => setShowRegisterStudentModal(!showRegisterStudentModal)}
+           onClick={() => setShowModal({ ...showModal, registerStd: !showModal.registerStd })}
            >
             Register new student
            </Button>
