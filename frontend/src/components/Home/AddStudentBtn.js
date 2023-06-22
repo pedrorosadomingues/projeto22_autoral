@@ -22,7 +22,7 @@ export default function AddStudentModal() {
 }
 
 const AddStudentModalCtn = w.main`
-flex w-full items-center justify-center column flex-col`;
+flex w-full items-center justify-center column flex-col mt-10`;
 
 const Button = w.button`
 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded`;
