@@ -1,14 +1,20 @@
 import { weekdays } from "@/utils";
 import { w } from "windstitch";
+import { useState } from "react";
 
-export default function WeekdayButtons({ handleChange }) {
+export default function WeekdayButtons({ handleChange, weekdayId }) {
+    const [ checkedState, setCheckedState ] = useState(true)
+
     return (
         <>
             <h1 className="mt-1">Weekday</h1>
             <WeekdayBtnCtn>
                 {weekdays.map((weekday) => (
                     <WeekdayButtonsStl key={weekday.id}  >
-                        <input className="cursor-pointer" onClick={(e) => handleChange(e)} type="radio" name="weekdayId" value={weekday.id} />
+                        <input className="cursor-pointer" onClick={(e) => {
+                            handleChange(e)
+                            setCheckedState(false)
+                            }} checked={weekday.id === weekdayId && checkedState ? true : null} type="radio" name="weekdayId" value={weekday.id} />
                         <label className="cursor-pointer text-[12px]" >{weekday.day}</label>
                     </WeekdayButtonsStl>
                 ))}

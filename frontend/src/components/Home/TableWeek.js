@@ -10,7 +10,7 @@ export default function TableWeek() {
 
     
     return (
-        <TableWeekCtn className={setRelative(showModal.registerStd)+ setHight800(showModal.registerStd)}>
+        <TableWeekCtn className={setRelative(showModal.registerStd || showModal.updateStd)+ setHight800(showModal.registerStd)}>
             {weekdays.map((day) => (
                 <Weekday key={day.id} day={day.day} id={day.id}
                 />

@@ -16,9 +16,7 @@ export default function ClassTime({ time, id, students, day }) {
     }
 
     return (
-        <ClassTimeCtn className={
-            !showModal.registerStd && "relative" 
-        }>
+        <ClassTimeCtn className={!showModal.registerStd  || showModal.updateStd && "relative"}>
             {
                 day === 'Mon' && <ClassTimeStl className={setAbsolute(showModal.registerStd)}>{time}</ClassTimeStl>
             }

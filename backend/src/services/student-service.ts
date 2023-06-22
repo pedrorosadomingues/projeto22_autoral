@@ -57,5 +57,5 @@ export async function updateStudentByIdService(
   params: Student
 ): Promise<Student> {
   const student = await verifyStudentUserId(params.id, params.userId);
-  return upsertStudentRepository({ ...params, cpf: student.cpf, createdAt: student.createdAt});
+  return upsertStudentRepository({ ...params, cpf: student.cpf, createdAt: student.createdAt, name: student.name, age: student.age});
 }

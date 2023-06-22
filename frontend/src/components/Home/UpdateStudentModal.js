@@ -7,13 +7,14 @@ import ClassTimeButtons from "../Form/ClassTimeButtons";
 import WeekdayButtons from "../Form/WeekdayButtons";
 
 export default function UpdateStudentModal() {
-    const [form, setForm] = useState({ name: '', age: 0, nivelId: 0, classTimeId: 0, cpf: '' })
-    const { showModal, setShowModal } = useContext(HomeContext)
-    const [token, setToken ] = useState(null)
+    const [form, setForm] = useState({ name: '', age: 0, nivelId: 1, classTimeId: 1, cpf: '' })
+    const { showModal, setShowModal, student } = useContext(HomeContext)
+    const [token, setToken] = useState(null)
 
     useEffect(() => {
         const token = localStorage.getItem('token')
         setToken(token)
+        setForm(student)
     }, [token])
     const Auth = { headers: {} };
 
@@ -26,12 +27,11 @@ export default function UpdateStudentModal() {
         setForm({ ...form, [name]: value })
     }
     async function handleSubmit(e) {
-
         e.preventDefault()
         try {
-            await api.post(`/student`, form, Auth)
-            alert('Cadastrado com sucesso')
-            setShowModal({ ...showModal, registerStd: !showModal.registerStd })
+            await api.put(`/student/${showModal.student.id}`, form, Auth)
+            alert('Updated successfully')
+            setShowModal({ ...showModal, updateStd: !showModal.updateStd })
         } catch (error) {
             console.log(error)
             error.response.data.details ? alert(error.response.data.details) : alert(error.response.data.message)
@@ -41,34 +41,27 @@ export default function UpdateStudentModal() {
     return (
         <>
             {
-                showModal.registerStd &&
-                <RegisterStdModal >
-                    <RegisterStdCtn >
-                        <Title>Register Student</Title>
-                        <CloseBtn onClick={() => setShowModal(!showModal.registerStd)}>X</CloseBtn>
+                showModal.updateStd &&
+                <UpdateStdModal >
+                    <UpdateStdCtn >
+                        <Title>Update Student</Title>
+                        <CloseBtn onClick={() => setShowModal(!showModal.updateStd)}>X</CloseBtn>
                         <Form onSubmit={handleSubmit} >
                             <Label>Name</Label>
-                            <Input onChange={handleChange}
-                                name="name"
-                                type="text"
-                                value={form.name} />
+                            <Input className="bg-gray-200" value={showModal.student.name}>
+                            </Input >
+
                             <Label>Age</Label>
-                            <Input onChange={handleChange}
-                                name="age"
-                                type="number"
-                                value={form.age} />
+                            <Input className="bg-gray-200" value={showModal.student.age} />
                             <Label>CPF</Label>
-                            <Input onChange={handleChange}
-                                name="cpf"
-                                type="text"
-                                value={form.cpf} />
-                            <LevelButtons handleChange={handleChange} />
-                            <ClassTimeButtons handleChange={handleChange} />
-                            <WeekdayButtons handleChange={handleChange} />
-                            <Button type="submit">Register</Button>
+                            <Input className="bg-gray-200" value={showModal.student.cpf} />
+                            <LevelButtons handleChange={handleChange} nivelId={showModal.student.nivelId}/>
+                            <ClassTimeButtons handleChange={handleChange} classTimeId={showModal.student.classTimeId}/>
+                            <WeekdayButtons handleChange={handleChange} weekdayId={showModal.student.weekdayId} />
+                            <Button type="submit">Update</Button>
                         </Form>
-                    </RegisterStdCtn>
-                </RegisterStdModal>
+                    </UpdateStdCtn>
+                </UpdateStdModal>
             }
         </>
     )
@@ -80,10 +73,10 @@ const Input = w.input`
 const Label = w.label`
   text-left`;
 
-const RegisterStdModal = w.main`
+const UpdateStdModal = w.main`
 absolute z-3 top-0 flex w-full h-[1200px] pb-[300px] items-center justify-center column flex-col bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
 
-const RegisterStdCtn = w.main`
+const UpdateStdCtn = w.main`
 flex w-1/3 items-center justify-center flex-col border-2 border-black border-opacity-50 p-4 rounded-lg shadow-lg bg-gray-200 bg-opacity-50 backdrop-filter backdrop-blur-lg`;
 const Title = w.h1`
   text-green-900 font-black text-2xl `;

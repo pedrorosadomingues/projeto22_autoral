@@ -26,7 +26,6 @@ export default function RegisterStudent() {
         setForm({ ...form, [name]: value })
     }
     async function handleSubmit(e) {
-
         e.preventDefault()
         try {
             await api.post(`/student`, form, Auth)
