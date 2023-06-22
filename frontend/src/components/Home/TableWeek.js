@@ -10,7 +10,7 @@ export default function TableWeek() {
 
     
     return (
-        <TableWeekCtn className={setRelative(showModal.registerStd || showModal.updateStd)+ setHight800(showModal.registerStd)}>
+        <TableWeekCtn className={`${showModal.registerStd || showModal.updateStd ? "h-[800px]" : ""}` }>
             {weekdays.map((day) => (
                 <Weekday key={day.id} day={day.day} id={day.id}
                 />

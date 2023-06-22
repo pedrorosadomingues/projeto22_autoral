@@ -17,7 +17,7 @@ export default function StudentName({ student }) {
                 window.location.href = '/StudentPage'
             }} >{student.name} </StdName>
             <EditStdButton className={
-                showModal.registerStd  || showModal.updateStd && 'hidden'
+                showModal.registerStd  || showModal.updateStd ? 'hidden' : ''
             } onClick={() => {
                 setShowModal({
                     ...showModal,
@@ -27,7 +27,7 @@ export default function StudentName({ student }) {
             }}><ion-icon name="create" ></ion-icon>
             </EditStdButton>
             <CloseBtn className={
-                showModal.registerStd  || showModal.updateStd && 'hidden'
+                showModal.registerStd  || showModal.updateStd ? 'hidden' : ''
             } onClick={() => {
                 setShowModal({
                     ...showModal,
