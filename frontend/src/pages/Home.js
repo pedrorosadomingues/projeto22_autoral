@@ -7,6 +7,7 @@ import TableWeek from '@/components/Home/TableWeek';
 import { w } from 'windstitch';
 import RegisterStudentModal from '@/components/Home/RegisterStudentModal';
 import ModalYesOrNo from '@/components/Home/YesOrNoModal';
+import UpdateStudentModal from '@/components/Home/UpdateStudentModal';
 
 
 export default function Home() {
@@ -18,6 +19,7 @@ export default function Home() {
     const [showModal, setShowModal] = useState({
         registerStd: false,
         yesOrNo: false,
+        updateStd: false,
     })
     const [handleEffect, setHandleEffect] = useState(false)
 
@@ -58,6 +60,7 @@ export default function Home() {
                 <Title>ClassPerformance</Title>
                 <AddStudentModal />
                 <RegisterStudentModal />
+                <UpdateStudentModal />
                 <TableWeek />
                 <ModalYesOrNo />
             </HomeCtn>

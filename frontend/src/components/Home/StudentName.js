@@ -13,25 +13,39 @@ export default function StudentName({ student }) {
     return (
         <div className='flex' >
             <StdName onClick={() => {
-                console.log('student', student)
                 setStdState(student)
                 window.location.href = '/StudentPage'
             }} >{student.name} </StdName>
-            <CloseBtn onClick={() => {
+            <EditStdButton className={
+                showModal.registerStd  || showModal.updateStd && 'hidden'
+            } onClick={() => {
+                setShowModal({
+                    ...showModal,
+                    updateStd: !showModal.updateStd,
+                    student: student
+                })
+            }}><ion-icon name="create" ></ion-icon>
+            </EditStdButton>
+            <CloseBtn className={
+                showModal.registerStd  || showModal.updateStd && 'hidden'
+            } onClick={() => {
                 setShowModal({
                     ...showModal,
                     yesOrNo: !showModal.yesOrNo,
                     studentName: student.name,
                     studentId: student.id
                 })
-            }}><ion-icon name="heart"></ion-icon>
+            }}><ion-icon name="trash"></ion-icon>
             </CloseBtn>
         </div >
     );
 };
 
 const StdName = w.h1`
-text-red-900 font-black cursor-pointer w-full max-w-[130px] text-[12px]  mt-1 rounded p-1 transition duration-300 hover:text-[13px]  hover:bg-red-900 hover:text-white truncate`;
+text-black-900 font-black cursor-pointer w-full max-w-[130px] text-[14px]  mt-1 rounded transition duration-300 hover:text-[15px] truncate`;
 
 const CloseBtn = w.span`
-  text-red-900 font-black cursor-pointer text-[12px] hover:text-[13px] transition duration-300 hover:bg-red-900 hover:text-white p-1 flex items-center mt-1 rounded`;
+text-red-900 font-black cursor-pointer text-[18px] hover:text-[20px] transition duration-300 hover:bg-red-900 hover:text-white flex items-center rounded`;
+
+const EditStdButton = w.span`
+  text-green-900 font-black cursor-pointer text-[18px] hover:text-[20px] transition duration-300 hover:bg-green-900 hover:text-white flex items-center rounded ml-1`;

@@ -91,7 +91,7 @@ export async function updateStudentById(
 
   try {
     await updateStudentByIdService({
-      name,
+      name: name,
       age: Number(age),
       nivelId: Number(nivelId),
       classTimeId: Number(classTimeId),
