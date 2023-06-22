@@ -2,6 +2,7 @@ import { w } from 'windstitch';
 import { useContext, useEffect } from 'react';
 import { HomeContext } from '@/contexts/HomeContext';
 
+
 export default function StudentName({ student }) {
     const { setShowModal, showModal, stdState, setStdState } = useContext(HomeContext);
 
@@ -23,13 +24,14 @@ export default function StudentName({ student }) {
                     studentName: student.name,
                     studentId: student.id
                 })
-            }}>X</CloseBtn>
+            }}><ion-icon name="heart"></ion-icon>
+            </CloseBtn>
         </div >
     );
 };
 
 const StdName = w.h1`
-text-red-900 font-black cursor-pointer w-full max-w-[130px] text-[12px] border-2 border-black mt-1 rounded p-1 transition duration-300 hover:text-[13px]  hover:bg-red-900 hover:text-white truncate`;
+text-red-900 font-black cursor-pointer w-full max-w-[130px] text-[12px]  mt-1 rounded p-1 transition duration-300 hover:text-[13px]  hover:bg-red-900 hover:text-white truncate`;
 
 const CloseBtn = w.span`
-  text-red-900 font-black cursor-pointer text-[12px] hover:text-[13px] transition duration-300 hover:bg-red-900 hover:text-white p-1 flex items-center ml-1  border-2 border-red-900 mt-1 rounded`;
+  text-red-900 font-black cursor-pointer text-[12px] hover:text-[13px] transition duration-300 hover:bg-red-900 hover:text-white p-1 flex items-center mt-1 rounded`;

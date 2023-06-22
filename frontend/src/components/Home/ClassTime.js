@@ -16,7 +16,9 @@ export default function ClassTime({ time, id, students, day }) {
     }
 
     return (
-        <ClassTimeCtn className={setRelative(showModal.registerStd)}>
+        <ClassTimeCtn className={
+            !showModal.registerStd && "relative" 
+        }>
             {
                 day === 'Mon' && <ClassTimeStl className={setAbsolute(showModal.registerStd)}>{time}</ClassTimeStl>
             }
@@ -28,7 +30,7 @@ export default function ClassTime({ time, id, students, day }) {
 }
 
 const ClassTimeCtn = w.div`
- flex  flex-col w-full h-screen min-w-[170px] items-center justify-center bg-gray-200 w-1/6 border-2 border-black p-1 `;
+flex  flex-col w-full h-screen min-w-[170px] items-center justify-center bg-gray-200 w-1/6 border-2 border-black p-1 `;
 
 const ClassTimeStl = w.h1`
  right-[100%] mr-[20px] text-red-900 font-black bg-blue-200 `;
