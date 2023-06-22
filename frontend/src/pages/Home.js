@@ -52,11 +52,7 @@ export default function Home() {
             stdState,
             setStdState
         }} >
-
             <HomeCtn >
-
-
-
                 <Title>ClassPerformance</Title>
                 <SubTitle> Welcome, {userName} </SubTitle>
                 <AddStudentModal />
@@ -65,11 +61,9 @@ export default function Home() {
                 <TableWeek />
                 <ModalYesOrNo />
             </HomeCtn>
-
         </HomeContext.Provider>
     )
 }
-
 
 const HomeCtn = w.main`
 flex w-full h-[100%] items-center  column flex-col bg-gray-200 justify-start`;
@@ -78,4 +72,4 @@ const Title = w.h1`
 text-4xl font-bold text-center text-green-800 p-10 `;
 
 const SubTitle = w.h2`
-text-2xl font-bold text-center text-blue-800`;
+text-2xl font-bold text-center text-red-800`;
