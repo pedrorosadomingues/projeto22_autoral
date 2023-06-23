@@ -14,7 +14,7 @@ export default function ClassTimeButtons({ handleChange, classTimeId }) {
                         <input className="cursor-pointer" onClick={(e) => {
                             handleChange(e)
                             setCheckedState(false)
-                            }} checked={time.id === classTimeId && checkedState ? true : null} type="radio" name="classTimeId" value={time.id} />
+                            }} type="radio" name="classTimeId" value={time.id} />
                         <label className="cursor-pointer text-[12px]" >{time.time}</label>
                     </ClassTimeButtonsStl>
                 ))}
