@@ -33,7 +33,7 @@ export default function RegisterStudent() {
             setShowModal({ ...showModal, registerStd: !showModal.registerStd })
         } catch (error) {
             console.log(error)
-            error.response.data.details ? alert(error.response.data.details) : alert(error.response.data.message)
+            error.response.data.details ? alert(error.response.data.message) : alert(error.response.data)
         }
     }
 

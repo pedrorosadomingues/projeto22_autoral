@@ -17,7 +17,8 @@
       {
         "transform": "typescript-transform-paths"
       }
-    ]
+    ],
+    "skipLibCheck": true
   },
   "ts-node": {
     "esm": true

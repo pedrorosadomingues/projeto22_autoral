@@ -5,7 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validateParams = exports.validateBody = void 0;
 const http_status_1 = __importDefault(require("http-status"));
+<<<<<<< HEAD
 const errors_1 = require("../errors");
+=======
+const errors_1 = require("../errors/index");
+>>>>>>> 66f21d1b9e4e995aff4f440fa769b9ec6e8ed476
 function validateBody(schema) {
     return validate(schema, 'body');
 }

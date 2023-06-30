@@ -6,8 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.authMiddleware = void 0;
 const http_status_1 = __importDefault(require("http-status"));
 const jsonwebtoken_1 = require("jsonwebtoken");
+<<<<<<< HEAD
 const errors_1 = require("../errors");
 const config_1 = require("../config");
+=======
+const errors_1 = require("../errors/index");
+const config_1 = require("../config/index");
+>>>>>>> 66f21d1b9e4e995aff4f440fa769b9ec6e8ed476
 async function authMiddleware(req, res, next) {
     const authHeader = req.header("Authorization");
     try {

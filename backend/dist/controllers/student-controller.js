@@ -5,7 +5,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateStudentById = exports.deleteStudentById = exports.getStudentByUser = exports.getStudentById = exports.postStudent = void 0;
 const http_status_1 = __importDefault(require("http-status"));
+<<<<<<< HEAD
 const services_1 = require("../services");
+=======
+const services_1 = require("../services/index");
+>>>>>>> 66f21d1b9e4e995aff4f440fa769b9ec6e8ed476
 async function postStudent(req, res) {
     const { name, age, nivelId, classTimeId, cpf, weekdayId } = req.body;
     const { userId } = res.locals;
@@ -24,9 +28,15 @@ async function postStudent(req, res) {
     }
     catch (error) {
         if (error.name === "DuplicateCPFError") {
+<<<<<<< HEAD
             return res.status(http_status_1.default.CONFLICT).send(error);
         }
         return res.send(http_status_1.default.NOT_FOUND).send(error);
+=======
+            return res.status(http_status_1.default.CONFLICT).send(error.message);
+        }
+        return res.status(http_status_1.default.NOT_FOUND).send(error.message);
+>>>>>>> 66f21d1b9e4e995aff4f440fa769b9ec6e8ed476
     }
 }
 exports.postStudent = postStudent;
