@@ -17,8 +17,8 @@ export default function SignIn() {
             localStorage.setItem('user', data.user.name);
             window.location.href = '/Home';
         } catch (error) {
-            console.log(error.response.data.message);
-            alert(error.response.data.message);
+            console.log(error.message);
+            alert(error.message);
         }
     };
     return (
@@ -37,7 +37,7 @@ export default function SignIn() {
                     type="password"
                     value={form.password} />
                 <Button type="submit">Sign-In</Button>
-                <P>Don`t have a account?<LinkStl href="/SignUp">Sign-Up</LinkStl></P>
+                <P>Don`t have a account? <LinkStl href="/SignUp">Sign-Up</LinkStl></P>
             </Form>
         </SignInCtn>
     )

@@ -14,7 +14,7 @@ export default function WeekdayButtons({ handleChange, weekdayId }) {
                         <input className="cursor-pointer" onClick={(e) => {
                             handleChange(e)
                             setCheckedState(false)
-                            }} checked={weekday.id === weekdayId && checkedState ? true : null} type="radio" name="weekdayId" value={weekday.id} />
+                            }} type="radio" name="weekdayId" value={weekday.id} />
                         <label className="cursor-pointer text-[12px]" >{weekday.day}</label>
                     </WeekdayButtonsStl>
                 ))}

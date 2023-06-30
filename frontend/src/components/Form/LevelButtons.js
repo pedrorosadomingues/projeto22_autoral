@@ -14,7 +14,7 @@ export default function LevelButtons({ handleChange, nivelId}) {
                         <input className={"cursor-pointer"} onClick={(e) => {
                             handleChange(e)
                             setCheckedState(false)
-                            }} checked={level.id === nivelId && checkedState ? true : null} type="radio" name="nivelId" value={level.id} />
+                            }} type="radio" name="nivelId" value={level.id} />
                         <label className={"cursor-pointer"} >{level.level}</label>
                     </LevelButtonsStl>
                 ))}
