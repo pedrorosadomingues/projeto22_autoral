@@ -1,9 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateStudentByIdService = exports.deleteStudentByIdService = exports.getAllStudentsByUserIdService = exports.createStudentService = exports.getStudentByIdService = void 0;
+<<<<<<< HEAD
+const repositories_1 = require("../repositories");
+const errors_1 = require("../errors");
+const errors_2 = require("../errors");
+=======
 const repositories_1 = require("../repositories/index");
 const errors_1 = require("../errors/index");
 const errors_2 = require("../errors/index");
+>>>>>>> 66f21d1b9e4e995aff4f440fa769b9ec6e8ed476
 async function verifyCpfStudent(cpf) {
     const student = await (0, repositories_1.getStudentByCpfRepository)(cpf);
     if (student)

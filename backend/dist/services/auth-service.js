@@ -6,8 +6,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.signIn = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+<<<<<<< HEAD
+const errors_1 = require("../errors");
+const repositories_1 = require("../repositories");
+=======
 const errors_1 = require("../errors/index");
 const repositories_1 = require("../repositories/index");
+>>>>>>> 66f21d1b9e4e995aff4f440fa769b9ec6e8ed476
 async function signIn({ email, password }) {
     const user = await (0, repositories_1.findUserByEmail)(email);
     if (!user)
