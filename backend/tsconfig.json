@@ -16,7 +16,8 @@
       {
         "transform": "typescript-transform-paths"
       }
-    ]
+    ],
+    "skipLibCheck": true
   },
   "include": ["src", "tests"]
 }
