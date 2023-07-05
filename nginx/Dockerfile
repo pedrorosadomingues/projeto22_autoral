@@ -1,5 +1,5 @@
 # busca imagem base do nginx (use :VERSAO se for necessário)
-FROM nginx:1.15.0
+FROM nginx
 
 # removendo a configuraçao padrão
 RUN rm /etc/nginx/conf.d/default.conf

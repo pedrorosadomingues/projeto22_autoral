@@ -5,10 +5,11 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next dev",
+    "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^0.0.0-dev-v2-20230625233448",
     "@ionic/react": "^7.1.0",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",

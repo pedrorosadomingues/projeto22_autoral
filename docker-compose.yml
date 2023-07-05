@@ -19,24 +19,21 @@ services:
     env_file:
       - backend/.env
 
-  react:
-    container_name: react
+  next-app:
+    container_name: next-app
     build: ./frontend
-    volumes:
-      - react-volume:/var/www/html
+    ports:
+      - 3000:3000
 
   nginx:
     container_name: nginx_app
     build: ./nginx
     ports:
-      - 8080:80
-    volumes:
-      - react-volume:/var/www/html
+      - 8091:80
     depends_on:
       - postgres
       - node
-      - react
+      - next-app
 
 volumes:
   postgres-volume:
-  react-volume:

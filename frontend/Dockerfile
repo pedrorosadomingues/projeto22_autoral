@@ -1,22 +1,16 @@
-FROM node
+FROM node:18-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
+
+# Install dependencies based on the preferred package manager
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+# Omit --production flag for TypeScript devDependencies
+RUN npm i
 
 COPY . .
 
-RUN npm install --production
+# Build Next.js based on the preferred package manager
 RUN npm run build
 
-RUN mkdir -p /var/www/html
-
-# move o conteúdo usando CRA (tire o comentário da linha abaixo para CRA)
-# RUN mv build/* /var/www/html
-
-#move o conteúdo usando VITE
-RUN mv .next/* /var/www/html
-
-# sai da pasta
-WORKDIR /
-
-# remove todo o diretório de desenvolvimento
-RUN rm -rf /tmp/react
+# Start Next.js based on the preferred package manager
+CMD ["npm", "start"]
