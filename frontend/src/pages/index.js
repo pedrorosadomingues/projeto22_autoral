@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import api from '../config/server';
 import { w } from "windstitch";
+import { useRouter} from 'next/router';
 
 export default function SignIn() {
     const [form, setForm] = useState({ email: '', password: '' });
@@ -15,12 +16,16 @@ export default function SignIn() {
             const { data } = await api.post('/sign-in', form);      
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', data.user.name);
-            window.location.href = '/Home';
+            navigateToHome();
         } catch (error) {
             console.log(error.message);
             alert(error.message);
         }
     };
+    const router = useRouter()
+    const navigateToHome = () => {
+        router.push('/Home');
+      };
     return (
         <SignInCtn
         >
@@ -37,7 +42,7 @@ export default function SignIn() {
                     type="password"
                     value={form.password} />
                 <Button type="submit">Sign-In</Button>
-                <P>Don`t have a account? <LinkStl href="/SignUp">Sign-Up</LinkStl></P>
+                <P>Don`t have a account? <Link href="/SignUp"><LinkStl>Sign-Up</LinkStl></Link></P>
             </Form>
         </SignInCtn>
     )
@@ -64,5 +69,5 @@ flex flex-col w-1/3`;
 const P = w.p`
   text-center text-gray-500 text-sm mt-4`;
 
-const LinkStl = w.a`
+const LinkStl = w.span`
   text-blue-500 hover:text-blue-700 text-sm hover:font-bold`;
