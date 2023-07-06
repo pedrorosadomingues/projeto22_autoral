@@ -29,7 +29,7 @@ services:
     container_name: nginx_app
     build: ./nginx
     ports:
-      - 8091:80
+      - 80:80
     depends_on:
       - postgres
       - node
