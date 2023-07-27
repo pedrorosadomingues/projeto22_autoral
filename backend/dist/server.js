@@ -24,7 +24,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importStar(require("./index"));
-const port = +process.env.PORT || 5000;
+const port = +process.env.PORT || 5001;
 (0, index_1.init)().then(() => {
     index_1.default.listen(port, () => {
         console.log(`Server is listening on port ${port}.`);
