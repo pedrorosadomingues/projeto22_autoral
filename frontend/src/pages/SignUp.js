@@ -16,8 +16,8 @@ export default function SignUp() {
             alert('Cadastrado com sucesso')
             window.location.href = '/'
         } catch (error) {
-            console.log(error.response.data.message)
-            alert(error.response.data.message)
+            console.log(error)
+            alert(error.response)
         }
     }
     return (
