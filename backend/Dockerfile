@@ -12,8 +12,7 @@ EXPOSE 5000
 
 # baixa as dependências
 
-RUN npm install -g npm@9.8.1
-RUN npm i --force
+RUN npm i 
 
 # faz a compilação do TS para JS
 RUN npm run build
