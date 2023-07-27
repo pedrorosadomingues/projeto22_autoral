@@ -11,9 +11,6 @@ COPY . .
 EXPOSE 5000
 
 # baixa as dependências
-RUN npm install -g npm-check-updates
-RUN ncu -u
-
 
 RUN npm i 
 
