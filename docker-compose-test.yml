@@ -17,3 +17,6 @@ services:
       - postgres
     env_file:
       - ./backend/.env.test
+
+volumes:
+  postgres-data:
