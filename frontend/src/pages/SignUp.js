@@ -41,7 +41,7 @@ export default function SignUp() {
                     type="password"
                     value={form.password} />
                 <Button type="submit">Sign-up</Button>
-                <P>Already have an account? <LinkStl href="/">Sign-in page</LinkStl></P>
+                <P>Already have an account? <LinkStl href="/">Sign-in</LinkStl></P>
             </Form>
         </SignUpCtn>
     )
