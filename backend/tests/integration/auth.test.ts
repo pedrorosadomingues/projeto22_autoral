@@ -1,15 +1,22 @@
-import app from "../../src/index";
+import app, { init } from "@/index";
 import supertest from "supertest";
+import httpStatus from "http-status";
+import { prisma } from "@/config";
+import { limparBanco } from "../helpers";
 
+beforeAll(async () => {
+  await init();
+});
+
+afterAll(async () => {
+  await limparBanco();
+});
 const api = supertest(app);
 
-describe("Auth", () => {
-  
-  it("should return 200 when sign in", async () => {
-    const res = await api.post("/sign-in").send({
-      email: "prof2@email.com",
-      password: "123456",
-    });
-    expect(res.status).toBe(200);
+describe("GET /student", () => {
+  it("should respond with status 401 if no token is given", async () => {
+    const response = await api.get("/student");
+
+    expect(response.status).toBe(httpStatus.UNAUTHORIZED);
   });
 });

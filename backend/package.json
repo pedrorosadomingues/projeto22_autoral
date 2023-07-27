@@ -6,13 +6,17 @@
   "scripts": {
     "build": "ttsc -p tsconfig.build.json",
     "start": "npm run prisma:migrate:deploy && node dist/server.js",
-    "dev": "nodemon src/server.ts",
-    "test": "npx dotenv -e .env.test npx jest -- --forceExit",
-    "prisma:migrate:dev": "prisma migrate dev",
-    "prisma:migrate:deploy": "prisma migrate deploy"
+    "dev": "npx dotenv -e .env.development nodemon src/server.ts",
+    "test": "npx dotenv -e .env.test npm run prisma:migrate:deploy && npx dotenv -e .env.test jest -- -i",
+    "prisma:migrate:dev": "npx dotenv -e .env.development prisma migrate dev",
+    "prisma:migrate:deploy": "prisma migrate deploy",
+    "prisma:seed": "npx dotenv -e .env.development prisma db seed"
   },
-  "author": "",
+  "author": "Pedro Rosa Domingues",
   "license": "ISC",
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "devDependencies": {
     "@faker-js/faker": "^6.3.1",
     "@types/bcrypt": "^5.0.0",
@@ -44,7 +48,7 @@
     "ts-node": "^10.9.1",
     "tsconfig-paths": "3.9.0",
     "ttypescript": "^1.5.15",
-    "typescript": "^4.2.4",
+    "typescript": "^5.1.6",
     "typescript-transform-paths": "^2.2.3"
   },
   "dependencies": {

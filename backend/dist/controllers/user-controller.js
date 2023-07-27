@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.userPost = void 0;
 const http_status_1 = __importDefault(require("http-status"));
-const user_service_1 = require("../services/user-service");
+const user_service_1 = require("@/services/user-service");
 async function userPost(req, res) {
     const { name, email, password } = req.body;
     try {
