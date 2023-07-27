@@ -1,6 +1,6 @@
 import app, { init } from './index';
 
-const port = +process.env.PORT || 5001;
+const port = +process.env.PORT || 5002;
 
 init().then(() => {
   app.listen(port, () => {
