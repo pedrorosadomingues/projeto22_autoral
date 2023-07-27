@@ -10,11 +10,11 @@ jobs:
         uses: SpicyPizza/create-envfile@v1.3
         with:
           envkey_PORT: 5000
-          envkey_DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/names?schema=public"
+          envkey_DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/classperformancedb_test?schema=public"
           envkey_POSTGRES_USERNAME: "postgres"
           envkey_POSTGRES_PASSWORD: "postgres"
-          envkey_POSTGRES_DB: "names"
-          directory: back-end
+          envkey_POSTGRES_DB: "classperformancedb_test"
+          directory: backend
           file_name: .env.test
           fail_on_empty: true
       - name: Run tests
