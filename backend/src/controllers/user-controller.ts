@@ -14,6 +14,6 @@ export async function userPost(req: Request, res: Response): Promise<Response> {
     if (error.name === "DuplicateEmailError") {
       return res.status(httpStatus.CONFLICT).send(error.message);
     }
-    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error);
   }
 }
