@@ -11,7 +11,7 @@ COPY . .
 EXPOSE 5000
 
 # baixa as dependências
-RUN npm i
+RUN npm i --force
 
 # faz a compilação do TS para JS
 RUN npm run build
