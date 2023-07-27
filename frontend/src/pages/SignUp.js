@@ -25,7 +25,7 @@ export default function SignUp() {
         >
             <Title>ClassPerformance</Title>
             <Form onSubmit={handleSubmit} >
-                <Label>Nome</Label>
+                <Label>Name</Label>
                 <Input onChange={handleChange}
                     name="name"
                     type="text"
@@ -35,13 +35,13 @@ export default function SignUp() {
                     name="email"
                     type="email"
                     value={form.email} />
-                <Label>Senha</Label>
+                <Label>Password</Label>
                 <Input onChange={handleChange}
                     name="password"
                     type="password"
                     value={form.password} />
-                <Button type="submit">Cadastrar</Button>
-                <P>Já tem conta? <LinkStl href="/">Entre</LinkStl></P>
+                <Button type="submit">Sign-up</Button>
+                <P>Already have an account?<LinkStl href="/">Sign-in page</LinkStl></P>
             </Form>
         </SignUpCtn>
     )
