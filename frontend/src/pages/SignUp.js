@@ -14,10 +14,10 @@ export default function SignUp() {
         try {
             await api.post('/user/sign-up', form)
             alert('Cadastrado com sucesso')
-            window.location.href = '/'
+            window.location.href = '/Home'
         } catch (error) {
             console.log(error)
-            alert(error.response)
+            alert(error.message)
         }
     }
     return (
