@@ -14,7 +14,7 @@ export default function SignUp() {
         try {
             await api.post('/user/sign-up', form)
             alert('Cadastrado com sucesso')
-            window.location.href = '/Home'
+            window.location.href = '/'
         } catch (error) {
             console.log(error)
             alert(error.message)
