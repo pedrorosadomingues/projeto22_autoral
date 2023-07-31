@@ -6,13 +6,7 @@ loadEnv();
 
 const app = express();
 
-const corsOptions = {
-  origin: "http://ec2-3-93-239-69.compute-1.amazonaws.com",
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"],
-};
-
-app.use(cors(corsOptions))
+app.use(cors())
 
   .use(express.json())
   .use('/user', userRoute)
