@@ -9,9 +9,6 @@ const app = express();
 app.use(cors())
 
 .use(express.json())
-.get("/health", (req, res) => {
-  res.send("Hello World!");
-})
 .use('/user', userRoute)
 .use('/sign-in', authRoute)
 .use('/student', studentRoute)
