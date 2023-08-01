@@ -25,6 +25,10 @@ services:
     ports:
       - 3000:3000
   
+  openssl:
+    build: ./openssl
+    volumes:
+    - ssl-certs:/certs
 
   nginx:
     container_name: nginx_app
@@ -32,10 +36,14 @@ services:
     ports:
       - 80:80
       - 443:443
+    volumes:
+      - ssl-certs:/certs
     depends_on:
       - postgres
       - node
       - next-app
+      - openssl
 
 volumes:
   postgres-volume:
+  ssl-certs:
