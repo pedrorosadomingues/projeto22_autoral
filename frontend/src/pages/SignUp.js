@@ -17,7 +17,7 @@ export default function SignUp() {
             window.location.href = '/'
         } catch (error) {
             console.log(error)
-            alert(error.response)
+            alert(error.message)
         }
     }
     return (
