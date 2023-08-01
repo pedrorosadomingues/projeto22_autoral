@@ -18,7 +18,7 @@ export default function SignIn() {
             localStorage.setItem('user', data.user.name);
             navigateToHome();
         } catch (error) {
-            console.log(error.message);
+            console.log(error);
             alert(error.message);
         }
     };
