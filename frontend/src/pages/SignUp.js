@@ -16,8 +16,9 @@ export default function SignUp() {
             alert('Cadastrado com sucesso')
             window.location.href = '/'
         } catch (error) {
-            console.log(error)
-            alert(error.message)
+            console.log(error.response.data)
+            if(error.response.data.name === 'InvalidDataError') return alert(error.response.data.details)
+            alert(error.response.data)
         }
     }
     return (
