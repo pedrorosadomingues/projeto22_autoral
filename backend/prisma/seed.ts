@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-async function seed() {
+
+async function seedHour() {
   await prisma.classtime.createMany({
     data: [
       {
@@ -18,7 +19,9 @@ async function seed() {
       },
     ],
   });
+}
 
+async function seedWeekday() {
   await prisma.weekday.createMany({
     data: [
       {
@@ -41,7 +44,9 @@ async function seed() {
       },
     ],
   });
+}
 
+async function seedNivel() {
   await prisma.nivel.createMany({
     data: [
       {
@@ -58,6 +63,19 @@ async function seed() {
       },
     ],
   });
+}
+
+async function seed() {
+
+  const getHour = await prisma.classtime.findMany();
+  const getWeekday = await prisma.weekday.findMany();
+  const getNivel = await prisma.nivel.findMany();
+
+  getHour.length === 0 ? await seedHour() : null;
+
+  getWeekday.length === 0 ? await seedWeekday() : null;
+  
+  getNivel.length === 0 ? await seedNivel() : null;
 }
 async function main() {
   return seed();
