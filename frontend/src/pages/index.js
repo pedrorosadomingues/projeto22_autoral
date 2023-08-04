@@ -19,7 +19,7 @@ export default function SignIn() {
             navigateToHome();
         } catch (error) {
             console.log(error);
-            alert(error.message);
+            alert(error.response.data.message);
         }
     };
     const router = useRouter()
